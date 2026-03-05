@@ -1,0 +1,57 @@
+[
+    {
+        "id": 0,
+        "name": "All News"
+    },
+    {
+        
+        "id": 1,
+        "name": "Breaking News"
+    },
+    {
+        
+        "id": 2,
+        "name": "Business"
+    },
+    {
+        
+        "id": 3,
+        "name": "Technology"
+    },
+    {
+        
+        "id": 4,
+        "name": "Sports"
+    },
+    {
+        
+        "id": 5,
+        "name": "Entertainment"
+    },
+   
+     {
+        
+        "id": 6,
+        "name": "Science"
+    },
+     {
+        
+        "id": 7,
+        "name": "Politics"
+    },
+     {
+        
+        "id": 8,
+        "name": "Education"
+    },
+     {
+        
+        "id": 9,
+        "name": "LifeStyle"
+    },
+     {
+        
+        "id": 10,
+        "name": "Health"
+    }
+]
