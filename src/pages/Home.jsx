@@ -5,4 +5,4 @@ const Home = () => {
   return <Navigate to="/category/1"></Navigate>
 }
 
-export default Home
+export default Home  
