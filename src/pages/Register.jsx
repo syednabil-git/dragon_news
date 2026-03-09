@@ -1,17 +1,30 @@
 import React, { use, useContext, useState } from 'react'
 import { Link, useNavigate } from 'react-router'
 import { AuthContext } from '../provider/AuthProvider'
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../firebase/Firebase.config';
 
 const Register = () => {
-  const { createUser, setUser, updateUser} = useContext(AuthContext);
-  const [nameError, setNameError] = useState(" ");
-  const navigate = useNavigate();
+ 
 
   const handleRegister = (e) => {
     e.preventDefault();
     //console.log(e.target);
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+    console.log(email, password)
+
     const form = e.target;
     const name = form.name.value;
+
+    createUserWithEmailAndPassword(auth, email, password)
+    .then(result => {
+      console.log(result.user);
+    })
+    .catch(error => {
+      console.log(error);
+    })
 
     if(name.length < 5){
       setNameError("Name should be more then 5 character");
@@ -22,8 +35,8 @@ const Register = () => {
     }
 
     const photo = form.photo.value;
-    const email = form.email.value;
-    const password = form.password.value;
+    //const email = form.email.value;
+    //const password = form.password.value;
    // console.log({name,photo,email,password});
     createUser(email, password)
     .then(result => {
@@ -45,6 +58,15 @@ const Register = () => {
       alert(errorMessage);
     });
   }
+  const { createUser, setUser, updateUser} = useContext(AuthContext);
+  const [nameError, setNameError] = useState(" ");
+  const [showPassword, setShowPassword ] = useState(false);
+  const navigate = useNavigate();
+
+  const handleToggleShowPassword = (event)=>{
+    event.preventDefault();
+    setShowPassword(!showPassword);
+  }
   return (
     <div>
         <div className='flex justify-center min-h-screen items-center'>
@@ -64,7 +86,10 @@ const Register = () => {
                   <label className="label">Email</label>
                   <input name='email' type="email" className="input" placeholder="Email" required />
                   <label className="label">Password</label>
-                  <input name='password' type="password" className="input" placeholder="Password" required />
+                  <input name='password' 
+                  type={showPassword ? 'text' : 'password'}
+                  className="input" placeholder="Password" required />
+                  <button className='btn btn-xs absolute top-82 right-11' onClick={handleToggleShowPassword}>{showPassword ? <FaEyeSlash></FaEyeSlash> : <FaEye></FaEye>}</button>
                   
                   <button type='submit' className="btn btn-neutral mt-4">Register</button>
                   <p className='font-semibold text-center pt-5'>All Ready Have An Account ?{" "}  <Link className='text-secondary' to="/auth/login">Login</Link></p>
